@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
+import { useStateContext } from '../context';
+
+import { usePrivy } from '@privy-io/react-auth';
 
 const Onboarding = () => {
+
+    const { createUser } = useStateContext()
+
+    const { user } = usePrivy();
+    console.log(user)
 
     const [username, setUsername] = useState("");
     const [age, setAge] = useState("");
@@ -8,8 +16,20 @@ const Onboarding = () => {
 
     const handleOnboarding = async (e) => {
         e.preventDefault()
-        console.log(username, age, location)
+
+        const userData = {
+            username,
+            age: parseInt(age, 10),
+            location,
+            createBy: user.email.address
+        }
+
+        const newUser = await createUser(userData)
+
+        console.log(newUser)
     }
+
+
 
     return (
         <div className='flex min-h-screen items-center justify-center bg-[#13131a]'>
