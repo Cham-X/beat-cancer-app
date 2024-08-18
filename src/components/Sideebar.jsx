@@ -46,7 +46,10 @@ const Sideebar = () => {
                                     isActive={isActive}
                                     handleClick={
                                         () => {
-                                            navigate(link.link)
+                                            if (!link.disabled) {
+                                                setIsActive(link.name)
+                                                navigate(link.link)
+                                            }
                                         }
                                     }
                                 />

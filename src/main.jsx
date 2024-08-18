@@ -23,7 +23,6 @@ root.render(
             <StateContextProvider>
                 <App />
             </StateContextProvider>
-            <App />
         </Router>
     </PrivyProvider>
 )

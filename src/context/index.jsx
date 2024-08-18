@@ -6,15 +6,16 @@ import { Users, Records } from '../utils/schema';
 
 import { eq } from 'drizzle-orm';
 
-const StateContext = createContext();
 
+
+const StateContext = createContext();
 
 
 export const StateContextProvider = ({ children }) => {
 
     const [users, setUsers] = useState([]);
 
-    const [reocrds, setRecords] = useState([]);
+    const [records, setRecords] = useState([]);
 
     const [currentUser, setCurrentUser] = useState(null)
 
@@ -41,18 +42,38 @@ export const StateContextProvider = ({ children }) => {
         }
     }, []);
 
+    // Function to create a new user
     const createUser = useCallback(async (userData) => {
         try {
-            const newUser = await db.insert(Users).values(userData).returning().execute();
-
-            setUsers((users) => [...users, newUser[0]]);
-            fetchUsers();
+            const newUser = await db
+                .insert(Users)
+                .values(userData)
+                .returning({ id: Users.id, createdBy: Users.createdBy })
+                .execute();
+            setUsers((prevUsers) => [...prevUsers, newUser[0]]);
+            return newUser[0];
         } catch (error) {
-            console.error("Error creating user", error)
+            console.error("Error creating user:", error);
+            return null;
         }
     }, []);
 
-    const fetchRecords = useCallback(async (userEmail) => {
+    // const createUser = useCallback(async (userData) => {
+    //     try {
+    //       const newUser = await db
+    //         .insert(Users)
+    //         .values(userData)
+    //         .returning({ id: Users.id, createdBy: Users.createdBy })
+    //         .execute();
+    //       setUsers((prevUsers) => [...prevUsers, newUser[0]]);
+    //       return newUser[0];
+    //     } catch (error) {
+    //       console.error("Error creating user:", error);
+    //       return null;
+    //     }
+    //   }, []);
+
+    const fetchUserRecords = useCallback(async (userEmail) => {
         try {
             const result = await db.select().from(Records).where(eq(Records.createdBy, userEmail)).execute();
 
@@ -89,18 +110,19 @@ export const StateContextProvider = ({ children }) => {
 
 
     return (
-        <StateContext.Provider value={{
-            users,
-            reocrds,
-            currentUser,
-            loading,
-            fetchUsers,
-            fetchUserByEmail,
-            createUser,
-            fetchRecords,
-            createRecord,
-            updateRecord,
-        }}>
+        <StateContext.Provider
+            value={{
+                users,
+                records,
+                fetchUsers,
+                fetchUserByEmail,
+                createUser,
+                fetchUserRecords,
+                createRecord,
+                currentUser,
+                updateRecord,
+            }}
+        >
             {children}
         </StateContext.Provider>
     )

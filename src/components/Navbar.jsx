@@ -18,7 +18,6 @@ function Navbar() {
 
     const navigate = useNavigate()
 
-    console.log(user)
 
     const handleLoginLogout = useCallback(() => {
         if (authenticated) {
@@ -27,7 +26,7 @@ function Navbar() {
             login().then(() => {
                 if (user) {
                     // fetch user ftom db
-                    console.log(user)
+                    // console.log(user)
                 }
             })
         }
@@ -72,7 +71,7 @@ function Navbar() {
                 />
             </div>
 
-            <div className={`absolute left-0 right-0 top-[60px] z-10 bg-[#1c1c24] py-4 shadow-secondary ${!toggleDrawer ? "-translate-y-[100vh]" : "translate-y-0"} transition-all duration-700`}>
+            <div className={`sm:hidden absolute left-0 right-0 top-[60px] z-10 bg-[#1c1c24] py-4 shadow-secondary ${!toggleDrawer ? "-translate-y-[100vh]" : "translate-y-0"} transition-all duration-700`}>
                 <ul className='mb-4'>
                     {
                         navLink.map((link) => {
