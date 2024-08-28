@@ -8,6 +8,7 @@ import MedicalRecords from "./pages/records/Index";
 import { useStateContext } from "./context";
 import { usePrivy } from "@privy-io/react-auth";
 import Profile from "./pages/Profile";
+import SingleRecordsDeatails from "./pages/records/components/SingleRecordsDeatails";
 
 const App = () => {
 
@@ -19,11 +20,11 @@ const App = () => {
 
     useEffect(() => {
         if (ready && !authenticated) {
-            login()
-        } else if (user && !currentUser) {
-            navigate("/onbaording");
+            login();
+        } else if (ready && authenticated && user && !currentUser) {
+            navigate("/onboarding");
         }
-    }, [ready, currentUser, navigate]);
+    }, [user, authenticated, login, currentUser, navigate]);
 
     return (
         <div className="relative flex min-h-screen flex-row bg-[#13131a] p-4">
@@ -37,6 +38,10 @@ const App = () => {
                     <Route path="/onboarding" element={<Onboarding />} />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/medical-records" element={<MedicalRecords />} />
+                    <Route
+                        path="/medical-records/:id"
+                        element={<SingleRecordsDeatails />}
+                    />
                 </Routes>
             </div>
         </div>

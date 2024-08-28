@@ -58,21 +58,6 @@ export const StateContextProvider = ({ children }) => {
         }
     }, []);
 
-    // const createUser = useCallback(async (userData) => {
-    //     try {
-    //       const newUser = await db
-    //         .insert(Users)
-    //         .values(userData)
-    //         .returning({ id: Users.id, createdBy: Users.createdBy })
-    //         .execute();
-    //       setUsers((prevUsers) => [...prevUsers, newUser[0]]);
-    //       return newUser[0];
-    //     } catch (error) {
-    //       console.error("Error creating user:", error);
-    //       return null;
-    //     }
-    //   }, []);
-
     const fetchUserRecords = useCallback(async (userEmail) => {
         try {
             const result = await db.select().from(Records).where(eq(Records.createdBy, userEmail)).execute();

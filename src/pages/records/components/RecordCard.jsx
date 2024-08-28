@@ -1,7 +1,7 @@
 import { IconChevronRight, IconFolder } from '@tabler/icons-react';
 import React from 'react';
 
-const RecordCard = ({ records, onNavigate }) => {
+const RecordCard = ({ record, onNavigate }) => {
 
 
     return (
@@ -12,11 +12,10 @@ const RecordCard = ({ records, onNavigate }) => {
                 </div>
             </div>
             <a
-                href="http://"
-                onClick={() => onNavigate(records.recordName)}
+                onClick={() => onNavigate(record.recordName)}
                 className='inline-flex cursor-pointer items-center justify-between rounded-b-xl border-t border-gray-200 text-sm text-gray-400 md:px-5 hover:border-neutral-800 '
             >
-                {records.recordName}
+                {record.recordName}
                 <IconChevronRight />
             </a>
         </div>
