@@ -7,7 +7,7 @@ const FileUploadModal = ({
     onClose,
     onFileChange,
     onFIleUpload,
-    upoLoading,
+    upLoading,
     upLoadSuccess,
     filename
 }) => {
@@ -36,7 +36,7 @@ const FileUploadModal = ({
                 <div className="group">
                     <label
                         htmlFor="fileInputDragDrop"
-                        className="cursor-pointer font-medium text-blue-700 group-focus-within:underline dark:text-blue-600"
+                        className="cursor-pointer font-medium text-blue-700 group-focus-within:underline text-center dark:text-blue-600"
                     >
                         <input
                             id="fileInputDragDrop"
@@ -52,7 +52,7 @@ const FileUploadModal = ({
                 <small id="validFileFormats">PNG, PDF, JPEG - Max 5MB</small>
             </div>
             {
-                upoLoading && (
+                upLoading && (
                     <IconProgress
                         size={15}
                         className='mr-3 h-7 w-7 animate-spin'

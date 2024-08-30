@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useContext, useState } from 'react';
+import React, { createContext, useCallback, useContext, useMemo, useState } from 'react';
 
 import { db } from '../utils/dbConfig';
 
@@ -93,19 +93,35 @@ export const StateContextProvider = ({ children }) => {
         }
     }, []);
 
+    const memoized = useMemo(() => {
+        return {
+            users,
+            records,
+            fetchUsers,
+            fetchUserByEmail,
+            createUser,
+            fetchUserRecords,
+            createRecord,
+            currentUser,
+            updateRecord,
+        }
+
+    }, [
+        users,
+        records,
+        fetchUsers,
+        fetchUserByEmail,
+        createUser,
+        fetchUserRecords,
+        createRecord,
+        currentUser,
+        updateRecord,
+    ])
 
     return (
         <StateContext.Provider
             value={{
-                users,
-                records,
-                fetchUsers,
-                fetchUserByEmail,
-                createUser,
-                fetchUserRecords,
-                createRecord,
-                currentUser,
-                updateRecord,
+                memoized
             }}
         >
             {children}

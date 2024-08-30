@@ -2,6 +2,7 @@ import React from "react";
 import { IconX } from "@tabler/icons-react";
 
 const Modal = ({ title, children, isOpen, onClose, onAction, actionLabel }) => {
+
     if (!isOpen) return null;
 
     return (
@@ -9,7 +10,7 @@ const Modal = ({ title, children, isOpen, onClose, onAction, actionLabel }) => {
             <div className="relative w-11/12 rounded-xl border border-gray-400 shadow-sm md:w-1/2 lg:w-1/3 dark:border-neutral-800 dark:bg-[#13131a]">
                 <div className="p-4 sm:p-7">
                     <div className="text-center">
-                        <h2 className="block text-2xl font-bold text-gray-600 dark:text-neutral-200">
+                        <h2 className="block text-2xl font-bold text-neutral-200">
                             {title}
                         </h2>
                     </div>
@@ -27,7 +28,7 @@ const Modal = ({ title, children, isOpen, onClose, onAction, actionLabel }) => {
                 </div>
                 <button
                     onClick={onClose}
-                    className="absolute right-4 top-4 text-gray-800 hover:text-gray-600 dark:text-neutral-200 dark:hover:text-neutral-400"
+                    className="absolute right-4 top-4 text-neutral-200 hover:text-neutral-400"
                 >
                     <IconX />
                 </button>

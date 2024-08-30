@@ -84,7 +84,7 @@ const Index = () => {
             />
 
             <div className='grid w-full sm:grid-cols-2 sm:gap-6 lg:grid-cols-4'>
-                {userRecord.map((record) => {
+                {/* {userRecord.map((record) => {
                     return (
                         <RecordCard
                             key={record.recorderName}
@@ -92,7 +92,7 @@ const Index = () => {
                             onNavigate={handleNavigate}
                         />
                     )
-                })}
+                })} */}
             </div>
         </div>
     );

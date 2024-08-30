@@ -7,6 +7,10 @@ export {
 }
 from "./Onboarding"
 export {
-    default as profile
+    default as Profile
 }
 from "./Profile"
+export {
+    default as ScreeningSchedule
+}
+from "./ScreeningSchedule"

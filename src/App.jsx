@@ -3,11 +3,10 @@ import React, { useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Sideebar from "./components/Sideebar";
 import Navbar from "./components/Navbar";
-import { Home, Onboarding } from "./pages";
+import { Home, Onboarding, Profile, ScreeningSchedule } from "./pages";
 import MedicalRecords from "./pages/records/Index";
 import { useStateContext } from "./context";
 import { usePrivy } from "@privy-io/react-auth";
-import Profile from "./pages/Profile";
 import SingleRecordsDeatails from "./pages/records/components/SingleRecordsDeatails";
 
 const App = () => {
@@ -38,10 +37,8 @@ const App = () => {
                     <Route path="/onboarding" element={<Onboarding />} />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/medical-records" element={<MedicalRecords />} />
-                    <Route
-                        path="/medical-records/:id"
-                        element={<SingleRecordsDeatails />}
-                    />
+                    <Route path="/medical-records/:id" element={<SingleRecordsDeatails />} />
+                    <Route path="/screenong-schedule" element={<ScreeningSchedule />} />
                 </Routes>
             </div>
         </div>
