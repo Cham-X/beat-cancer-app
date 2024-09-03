@@ -20,10 +20,10 @@ const App = () => {
     useEffect(() => {
         if (ready && !authenticated) {
             login();
-        } else if (ready && authenticated && user && !currentUser) {
+        } else if (ready && authenticated) {
             navigate("/onboarding");
         }
-    }, [user, authenticated, login, currentUser, navigate]);
+    }, [user, authenticated, ready]);
 
     return (
         <div className="relative flex min-h-screen flex-row bg-[#13131a] p-4">

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useState, useEffect } from 'react'
 
 import { search, menu } from '../assets'
 import CustomButton from './CustomButton'
@@ -8,9 +8,14 @@ import { IconHeartHandshake } from '@tabler/icons-react'
 import { navLink } from '../constants'
 import { useNavigate } from 'react-router-dom'
 
+import { useStateContext } from '../context'
+
 function Navbar() {
 
     const { ready, authenticated, login, user, logout } = usePrivy()
+
+    // const { fetchUsers, users, fetchUserRecords } = useStateContext();
+
 
     const [toggleDrawer, setToggleDrawer] = useState(false)
 
@@ -18,19 +23,38 @@ function Navbar() {
 
     const navigate = useNavigate()
 
+    // const fetchUserInfo = useCallback(async () => {
+    //     if (!user) return;
+
+    //     try {
+    //         await fetchUsers();
+    //         const existingUser = users.find(
+    //             (u) => u.createdBy === user.email.address,
+    //         );
+    //         if (existingUser) {
+    //             await fetchUserRecords(user.email.address);
+    //         }
+    //     } catch (error) {
+    //         console.error("Error fetching user info:", error);
+    //     }
+    // }, [user, fetchUsers, users, fetchUserRecords]);
+
+    // useEffect(() => {
+    //     if (authenticated && user) {
+    //         fetchUserInfo();
+    //     }
+    // }, [authenticated, user, fetchUserInfo]);
 
     const handleLoginLogout = useCallback(() => {
+        console.log("click")
         if (authenticated) {
-            logout()
+            console.log('logout')
+            logout();
         } else {
-            login().then(() => {
-                if (user) {
-                    // fetch user ftom db
-                    // console.log(user)
-                }
-            })
+            console.log('login')
+            login()
         }
-    }, [authenticated, login, logout, user,])
+    }, [authenticated, login, user, logout]);
 
     return (
         <div className='mb-[35px] flex flex-col-reverse justify-between gap-6 md:flex-row'>

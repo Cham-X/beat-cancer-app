@@ -45,11 +45,7 @@ export const StateContextProvider = ({ children }) => {
     // Function to create a new user
     const createUser = useCallback(async (userData) => {
         try {
-            const newUser = await db
-                .insert(Users)
-                .values(userData)
-                .returning({ id: Users.id, createdBy: Users.createdBy })
-                .execute();
+            const newUser = await db.insert(Users).values(userData).returning({ id: Users.id, createdBy: Users.createdBy }).execute();
             setUsers((prevUsers) => [...prevUsers, newUser[0]]);
             return newUser[0];
         } catch (error) {
@@ -93,35 +89,35 @@ export const StateContextProvider = ({ children }) => {
         }
     }, []);
 
-    const memoized = useMemo(() => {
-        return {
-            users,
-            records,
-            fetchUsers,
-            fetchUserByEmail,
-            createUser,
-            fetchUserRecords,
-            createRecord,
-            currentUser,
-            updateRecord,
-        }
+    // const memoized = useMemo(() => {
+    //     return {
+    //         users,
+    //         records,
+    //         fetchUsers,
+    //         fetchUserByEmail,
+    //         createUser,
+    //         fetchUserRecords,
+    //         createRecord,
+    //         currentUser,
+    //         updateRecord,
+    //     }
 
-    }, [
-        users,
-        records,
-        fetchUsers,
-        fetchUserByEmail,
-        createUser,
-        fetchUserRecords,
-        createRecord,
-        currentUser,
-        updateRecord,
-    ])
+    // }, [
+
+    // ])
 
     return (
         <StateContext.Provider
             value={{
-                memoized
+                users,
+                records,
+                fetchUsers,
+                fetchUserByEmail,
+                createUser,
+                fetchUserRecords,
+                createRecord,
+                currentUser,
+                updateRecord,
             }}
         >
             {children}

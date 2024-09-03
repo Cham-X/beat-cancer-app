@@ -27,9 +27,9 @@ const Onboarding = () => {
             createdBy: user.email.address,
         };
 
-        // console.log(userData);
         const newUser = await createUser(userData);
         if (newUser) {
+            console.log(newUser);
             navigate("/profile");
         }
     };
